@@ -3,17 +3,30 @@
 **ImageBoost** is an end-to-end deep learning pipeline that denoises, enhances, and classifies low-quality images. The goal is to demonstrate how restoring visual fidelity improves downstream classification performance—and to explore how these tasks can be unified into a single, optimized pipeline.
 
 ## Project Overview
+## Module Interaction & Data Flow
 
-Real-world images often suffer from noise, low resolution, or degradation, which impacts tasks like classification and detection. Our solution integrates three key components:
+The ImageBoost pipeline flows through three sequential modules, each transforming the image to improve overall classification accuracy:
 
-1. **Image Denoising**  
-   Removes noise artifacts from low-quality images using convolutional autoencoders (e.g., DnCNN, UNet).
+1. **Denoising Module**
+   - Removes synthetic or real-world noise from input images
+   - Input: Noisy image (`256x256`, RGB)
+   - Output: Denoised image (`256x256`, RGB)
 
-2. **Super-Resolution / Enhancement**  
-   Upscales and enhances image quality using models like SRCNN or GAN-based approaches (e.g., SRGAN).
+2. **Enhancement Module**
+   - Applies super-resolution or sharpening to improve clarity
+   - Input: Denoised image
+   - Output: Enhanced image (`512x512`, RGB or same size)
 
-3. **Image Classification**  
-   Applies deep learning models (e.g., ResNet, EfficientNet) to classify the restored images with improved accuracy.
+3. **Classification Module**
+   - Classifies the enhanced image into a category
+   - Input: Enhanced image
+   - Output: Class label (e.g., "cat", "car", "flower")
+
+Each stage saves outputs to shared folders for the next module to use:
+- `data/denoising_outputs/`
+- `data/enhancement_outputs/`
+
+All images are saved in `.png` format to ensure compatibility across modules.
 
 ## Team Roles
 
