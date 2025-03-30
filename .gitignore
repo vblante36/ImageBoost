@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environments
+venv/
+env/
+
+# System files
+.DS_Store
+
+# Data folder (don't push large files)
+data/
